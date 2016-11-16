@@ -1,0 +1,10 @@
+language: node_js
+
+node_js:
+  - "7"
+
+before_install:
+  - make setup
+
+script:
+  - make build-ci

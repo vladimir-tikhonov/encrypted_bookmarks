@@ -2,9 +2,10 @@
  * The main idea here is add the localhost on script tags with data-bundle
  * attribute on development mode.
  */
-const env = require('./env');
 const fileSystem = require('fs');
 const path = require('path');
+
+const env = require('./env.js');
 
 const buildPath = path.join(__dirname, '../build');
 

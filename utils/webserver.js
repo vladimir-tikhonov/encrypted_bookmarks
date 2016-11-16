@@ -1,11 +1,12 @@
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
-const config = require('../webpack.config');
-const env = require('./env');
 const path = require('path');
 
-require('./prepare');
-require('./prepare_script_tags');
+const config = require('../configs/webpack.config.js');
+const env = require('./env.js');
+
+require('./prepare.js');
+require('./prepare_script_tags.js');
 
 config.entry['webpack-server'] = ('webpack-dev-server/client?http://localhost:' + env.PORT);
 
