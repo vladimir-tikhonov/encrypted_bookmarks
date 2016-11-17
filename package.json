@@ -18,8 +18,8 @@
     "npm-check": "npm-check --skip-unused",
     "npm-update": "npm-check --skip-unused -u",
 
-    "eslint": "eslint '{configs,src,utils}/**/*.js?(x)'",
-    "eslint-fix": "eslint '{configs,src,utils}/**/*.js?(x)' --fix"
+    "eslint": "eslint '{configs,src,tools}/**/*.js?(x)'",
+    "eslint-fix": "eslint '{configs,src,tools}/**/*.js?(x)' --fix"
   },
   "dependencies": {
     "react": "^15.4.0",
