@@ -9,8 +9,7 @@ start-devserver:
 	npm run start
 
 clean-build:
-	rm -r ./build
-	mkdir build
+	rm -rf ./build/*
 
 setup:
 	npm install
