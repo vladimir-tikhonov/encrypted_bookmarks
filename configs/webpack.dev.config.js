@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 
 const ROOT_PATH = path.join(__dirname, '..');
@@ -11,7 +12,6 @@ module.exports = {
     entry: {
         popup: path.join(SOURCE_PATH, 'scripts', 'popup.jsx'),
         options: path.join(SOURCE_PATH, 'scripts', 'options.jsx'),
-        background: path.join(SOURCE_PATH, 'scripts', 'background.js'),
     },
 
     output: {
@@ -33,7 +33,10 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loaders: ['style-loader', 'css-loader'],
+                loaders: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style-loader',
+                    loader: ['css-loader'],
+                }),
             },
         ],
     },
@@ -55,5 +58,6 @@ module.exports = {
         new webpack.DllReferencePlugin({
             manifest: path.join(BUILD_PATH, 'dll', 'manifest.json'),
         }),
+        new ExtractTextPlugin('[name].css'),
     ],
 };

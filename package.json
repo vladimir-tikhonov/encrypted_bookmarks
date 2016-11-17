@@ -12,12 +12,9 @@
     "start-webpack": "webpack --config configs/webpack.dev.config.js --watch",
     "build-dev": "webpack --config configs/webpack.dev.config.js",
     "build-dev-dll": "webpack --config configs/webpack.dll.dev.config.js",
-
     "generate-manifest": "node ./tools/generate_manifest.js",
-
     "npm-check": "npm-check --skip-unused",
     "npm-update": "npm-check --skip-unused -u",
-
     "eslint": "eslint '{configs,src,tools}/**/*.js?(x)'",
     "eslint-fix": "eslint '{configs,src,tools}/**/*.js?(x)' --fix"
   },
@@ -35,6 +32,7 @@
     "css-loader": "^0.26.0",
     "eslint": "^3.10.2",
     "eslint-plugin-react": "^6.7.1",
+    "extract-text-webpack-plugin": "^2.0.0-beta.4",
     "npm-check": "^5.4.0",
     "style-loader": "^0.13.1",
     "webpack": "^2.1.0-beta.27"
