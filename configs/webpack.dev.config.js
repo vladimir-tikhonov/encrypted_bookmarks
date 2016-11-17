@@ -1,8 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const env = require('../utils/env.js');
-
 const ROOT_PATH = path.join(__dirname, '..');
 const SOURCE_PATH = path.join(ROOT_PATH, 'src');
 const BUILD_PATH = path.join(ROOT_PATH, 'build');
@@ -51,7 +49,7 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify(env.NODE_ENV),
+                NODE_ENV: JSON.stringify('development'),
             },
         }),
         new webpack.DllReferencePlugin({
