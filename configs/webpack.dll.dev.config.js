@@ -1,22 +1,25 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const ROOT_PATH = path.join(__dirname, '..');
+const SOURCE_PATH = path.join(ROOT_PATH, 'src');
+const BUILD_PATH = path.join(ROOT_PATH, 'build');
+
 module.exports = {
     entry: [
-        path.join(__dirname, '..', 'src', 'scripts', 'vendors.js'),
+        path.join(SOURCE_PATH, 'scripts', 'vendors.js'),
     ],
 
     output: {
-        path: path.join(__dirname, '..', 'build', 'dll'),
+        path: path.join(BUILD_PATH, 'dll'),
         filename: 'dll.js',
         library: 'dll',
     },
 
     plugins: [
         new webpack.DllPlugin({
-            path: path.join(__dirname, '..', 'build', 'dll', 'manifest.json'),
+            path: path.join(BUILD_PATH, 'dll', 'manifest.json'),
             name: 'dll',
         }),
-        new webpack.optimize.OccurrenceOrderPlugin(),
     ],
 };
