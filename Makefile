@@ -12,6 +12,8 @@ build-prod:
 	$(MAKE) clean-build
 	$(MAKE) setup-prod-build
 	npm run build-prod
+	rm -f build/dll/manifest.json build/.DS_Store
+	cd build; zip -r -T release.zip ./*; cd ..
 
 clean-build:
 	rm -rf ./build/*
