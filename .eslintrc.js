@@ -14,6 +14,9 @@ module.exports = {
         'node': true,
         'es6': true,
     },
+    'globals': {
+        'chrome': false,
+    },
     'rules': {
         'no-global-assign': 'error',
         'no-invalid-this': 'error',
