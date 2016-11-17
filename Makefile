@@ -1,18 +1,27 @@
-.PHONY : clean-build build-dll start-devserver
+start:
+	$(MAKE) clean-build
+	$(MAKE) setup-dev-build
+	$(MAKE) start-webpack
 
-start: clean-build build-dll start-devserver
-
-build-dll:
-	npm run build-dll
-
-start-devserver:
-	npm run start
+build-dev:
+	$(MAKE) clean-build
+	$(MAKE) setup-dev-build
+	npm run build-dev
 
 clean-build:
 	rm -rf ./build/*
+
+setup-dev-build:
+	npm run build-dev-dll
+	cp src/html/* ./build/
+	npm run generate-manifest
+
+start-webpack:
+	npm run start-webpack
 
 setup:
 	npm install
 
 build-ci:
 	npm run eslint
+	$(MAKE) build-dev

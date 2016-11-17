@@ -16,3 +16,6 @@ node_modules
 
 # Webpack build folder
 build/
+
+# MasOS trash
+.DS_Store
