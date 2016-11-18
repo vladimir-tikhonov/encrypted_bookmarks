@@ -1,4 +1,4 @@
 {
   "presets": ["es2015", "react"],
-  "plugins": ["transform-object-rest-spread"]
+  "plugins": ["transform-react-constant-elements", "transform-react-pure-class-to-function"]
 }
