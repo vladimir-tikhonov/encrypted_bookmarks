@@ -20,7 +20,6 @@
   cursor: pointer;
   margin-right: 6px;
   display: inline-block;
-  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -30,7 +29,6 @@
 
 /* rotate the triangle to close it */
 .tree-view_arrow-collapsed {
-  -webkit-transform: rotate(-90deg);
   transform: rotate(-90deg);
 }
 

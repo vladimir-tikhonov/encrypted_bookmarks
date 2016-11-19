@@ -12,7 +12,7 @@ import OptionsPage from 'scripts/pages/OptionsPage.jsx';
 import 'styles/options.css';
 
 Promise.all([
-    storage.getHiddenBookmarkFolderIds(),
+    storage.getEncryptedBookmarkFolderIds(),
     bookmarksService.fetchBookmarkTree(),
 ]).then(([ids, bookmarks]) => {
     const initialState = {

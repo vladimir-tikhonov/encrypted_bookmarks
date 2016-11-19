@@ -48,11 +48,11 @@ class OptionsPage extends React.PureComponent {
     }
 
     onSaveButtonClicked() {
-        storage.setHiddenBookmarkFolderIds(this.props.selectedIds);
+        storage.setEncryptedBookmarkFolderIds(this.props.selectedIds);
     }
 
     onResetButtonClicked() {
-        storage.getHiddenBookmarkFolderIds().then((ids) => {
+        storage.getEncryptedBookmarkFolderIds().then((ids) => {
             this.props.onIdsRestored(ids);
         });
     }
