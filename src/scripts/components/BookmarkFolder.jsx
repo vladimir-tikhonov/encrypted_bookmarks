@@ -29,7 +29,7 @@ class BookmarkFolder extends React.PureComponent {
 
     renderLabel() {
         const {bookmarkFolder, onToggle, selectedIds} = this.props;
-        const checked = selectedIds.has(bookmarkFolder.id);
+        const checked = selectedIds.includes(bookmarkFolder.id);
         const name = bookmarkFolder.isRoot() ? '<Root>' : bookmarkFolder.name;
 
         return (
@@ -64,7 +64,7 @@ class BookmarkFolder extends React.PureComponent {
 
 BookmarkFolder.propTypes = {
     bookmarkFolder: PropTypes.object.isRequired,
-    selectedIds: PropTypes.object.isRequired,
+    selectedIds: PropTypes.array.isRequired,
     onToggle: PropTypes.func.isRequired,
 };
 

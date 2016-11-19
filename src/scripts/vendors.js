@@ -5,4 +5,5 @@ import 'react-redux';
 import 'redux-thunk';
 import 'classnames';
 
-import 'lodash/intersection';
+import 'lodash/union';
+import 'lodash/difference';
