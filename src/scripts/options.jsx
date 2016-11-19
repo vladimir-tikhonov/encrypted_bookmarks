@@ -1,25 +1,31 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {createStore, compose, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 
 import reducer from 'scripts/reducers/index.js';
+import storage from 'scripts/services/Storage.js';
 import BookmarkFolderTree from 'scripts/components/BookmarkFolderTree.jsx';
 
 import 'styles/options.css';
 
-const store = createStore(reducer, compose(
-    applyMiddleware(thunk),
-    window.devToolsExtension ? window.devToolsExtension() : f => f,
-));
+storage.getHiddenBookmarkFolderIds().then(ids => {
+    const initialState = {
+        bookmarkFolders: {
+            selectedIds: ids,
+        },
+    };
 
-const OptionsPage = () => {
-    return (
-        <Provider store={store}>
-            <BookmarkFolderTree />
-        </Provider>
-    ) ;
-};
+    const store = createStore(reducer, initialState, applyMiddleware(thunk));
 
-render(<OptionsPage />, document.getElementById('app-container'));
+    const OptionsPage = () => {
+        return (
+            <Provider store={store}>
+                <BookmarkFolderTree />
+            </Provider>
+        ) ;
+    };
+
+    render(<OptionsPage />, document.getElementById('app-container'));
+});

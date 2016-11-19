@@ -2,7 +2,8 @@ import {
     BOOKMARK_FOLDERS_REQUEST_STARTED,
     BOOKMARK_FOLDERS_REQUEST_FINISHED,
     BOOKMARK_FOLDERS_IDS_SELECTED,
-    BOOKMARK_FOLDERS_IDS_DESELECTED} from 'scripts/actions/list.js';
+    BOOKMARK_FOLDERS_IDS_DESELECTED,
+    BOOKMARK_FOLDERS_IDS_RESTORED} from 'scripts/actions/list.js';
 import bookmarksService from 'scripts/services/BookmarksService.js';
 
 const bookmarkFoldersRequestStarted = () => ({
@@ -23,6 +24,11 @@ export const loadBookmarkFolders = () => {
         });
     };
 };
+
+export const bookmarkFoldersIdsRestored = (ids) => ({
+    type: BOOKMARK_FOLDERS_IDS_RESTORED,
+    ids,
+});
 
 export const bookmarkFoldersIdsSelected = (ids) => ({
     type: BOOKMARK_FOLDERS_IDS_SELECTED,
