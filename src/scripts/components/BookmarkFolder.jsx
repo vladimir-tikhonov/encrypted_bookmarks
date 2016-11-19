@@ -3,6 +3,15 @@ import React, {PropTypes} from 'react';
 import TreeView from 'scripts/components/TreeView.jsx';
 
 class BookmarkFolder extends React.PureComponent {
+    constructor() {
+        super();
+        this.state = {collapsed: false};
+    }
+
+    toggleCollapsed() {
+        this.setState({collapsed: !this.state.collapsed});
+    }
+
     renderChildren() {
         const {bookmarkFolder} = this.props;
 
@@ -19,7 +28,12 @@ class BookmarkFolder extends React.PureComponent {
 
         return (
             <div>
-                <TreeView key={bookmarkFolder.id} nodeLabel={label} defaultCollapsed={false}>
+                <TreeView
+                    key={bookmarkFolder.id}
+                    nodeLabel={label}
+                    collapsed={this.state.collapsed}
+                    onArrowClick={() => this.toggleCollapsed()}
+                >
                     {this.renderChildren()}
                 </TreeView>
             </div>

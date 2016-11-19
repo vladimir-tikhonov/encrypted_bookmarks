@@ -1,61 +1,56 @@
 import React, {PropTypes} from 'react';
+import classnames from 'classnames';
 
-const TreeView = React.createClass({
-    propTypes: {
-        collapsed: PropTypes.bool,
-        defaultCollapsed: PropTypes.bool,
-        nodeLabel: PropTypes.node.isRequired,
-        className: PropTypes.string,
-        itemClassName: PropTypes.string,
-        onClick: PropTypes.func,
-    },
-
-    getInitialState() {
-        return {collapsed: this.props.defaultCollapsed};
-    },
-
-    handleClick(...args) {
-        this.setState({collapsed: !this.state.collapsed});
-        if (this.props.onClick) {
-            this.props.onClick(...args);
+class TreeView extends React.PureComponent {
+    renderArrow() {
+        const {collapsed, onArrowClick, children} = this.props;
+        if (children.length === 0) {
+            return null;
         }
-    },
+
+        const classes = classnames('tree-view_arrow', {
+            'tree-view_arrow-collapsed': collapsed,
+        });
+
+        return (
+            <div
+                className={classes}
+                onClick={onArrowClick}
+            />
+        );
+    }
 
     render() {
         const {
-            collapsed = this.state.collapsed,
-            className = '',
-            itemClassName = '',
+            collapsed,
             nodeLabel,
             children,
         } = this.props;
 
-        let arrowClassName = 'tree-view_arrow';
-        let containerClassName = 'tree-view_children';
-        if (collapsed) {
-            arrowClassName += ' tree-view_arrow-collapsed';
-            containerClassName += ' tree-view_children-collapsed';
-        }
-
-        const arrow = (
-            <div
-                className={className + ' ' + arrowClassName}
-                onClick={this.handleClick}
-            />
-        );
+        const containerClasses = classnames('tree-view_children', {
+            'tree-view_children-collapsed': collapsed,
+        });
 
         return (
             <div className="tree-view">
-                <div className={'tree-view_item ' + itemClassName}>
-                    {arrow}
+                <div className={'tree-view_item'}>
+                    {this.renderArrow()}
                     {nodeLabel}
                 </div>
-                <div className={containerClassName}>
+                <div className={containerClasses}>
                     {collapsed ? null : children}
                 </div>
             </div>
         );
-    },
-});
+    }
+}
+
+TreeView.propTypes = {
+    collapsed: PropTypes.bool.isRequired,
+    nodeLabel: PropTypes.node.isRequired,
+    className: PropTypes.string,
+    itemClassName: PropTypes.string,
+    onArrowClick: PropTypes.func.isRequired,
+};
 
 export default TreeView;
