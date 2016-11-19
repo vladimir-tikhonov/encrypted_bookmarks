@@ -1,14 +1,23 @@
 import BookmarkFolder from 'scripts/models/BookmarkFolder.js';
 
-function transformNativeBookmarkTree(nativeBookmarkTree) {
+function transformNativeBookmarkTree(nativeBookmarkTree, parent) {
     return nativeBookmarkTree.map(bookmarkTreeNode => {
         const isFolder = !bookmarkTreeNode.hasOwnProperty('url');
         if (!isFolder) {
             return null;
         }
 
-        var children = transformNativeBookmarkTree(bookmarkTreeNode.children || []);
-        return new BookmarkFolder(bookmarkTreeNode.id, bookmarkTreeNode.title, children);
+        const bookmarkFolder = new BookmarkFolder({
+            id: bookmarkTreeNode.id,
+            name: bookmarkTreeNode.title,
+            parent: parent,
+            children: [],
+        });
+
+        var children = transformNativeBookmarkTree(bookmarkTreeNode.children || [], bookmarkFolder);
+        bookmarkFolder.children = children;
+
+        return bookmarkFolder;
     })
     .filter(bookmarkFolderObject => bookmarkFolderObject !== null);
 }
@@ -19,6 +28,6 @@ export default {
             chrome.bookmarks.getTree((bookmarkTree) => {
                 resolve(bookmarkTree);
             });
-        }).then(transformNativeBookmarkTree);
+        }).then(nativeBookmarkTree => transformNativeBookmarkTree(nativeBookmarkTree, null));
     },
 };

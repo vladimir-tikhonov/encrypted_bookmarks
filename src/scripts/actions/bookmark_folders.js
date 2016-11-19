@@ -1,6 +1,8 @@
 import {
     BOOKMARK_FOLDERS_REQUEST_STARTED,
-    BOOKMARK_FOLDERS_REQUEST_FINISHED} from 'scripts/actions/list.js';
+    BOOKMARK_FOLDERS_REQUEST_FINISHED,
+    BOOKMARK_FOLDERS_IDS_SELECTED,
+    BOOKMARK_FOLDERS_IDS_DESELECTED} from 'scripts/actions/list.js';
 import bookmarksService from 'scripts/services/BookmarksService.js';
 
 const bookmarkFoldersRequestStarted = () => ({
@@ -9,7 +11,7 @@ const bookmarkFoldersRequestStarted = () => ({
 
 const bookmarkFoldersRequestFinished = (rootBookmark) => ({
     type: BOOKMARK_FOLDERS_REQUEST_FINISHED,
-    rootBookmark: rootBookmark,
+    rootBookmark,
 });
 
 export const loadBookmarkFolders = () => {
@@ -21,3 +23,13 @@ export const loadBookmarkFolders = () => {
         });
     };
 };
+
+export const bookmarkFoldersIdsSelected = (ids) => ({
+    type: BOOKMARK_FOLDERS_IDS_SELECTED,
+    ids,
+});
+
+export const bookmarkFoldersIdsDeselected = (ids) => ({
+    type: BOOKMARK_FOLDERS_IDS_DESELECTED,
+    ids,
+});
