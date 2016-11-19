@@ -2,7 +2,9 @@ import {combineReducers} from 'redux';
 
 import {
     BOOKMARK_FOLDERS_REQUEST_STARTED,
-    BOOKMARK_FOLDERS_REQUEST_FINISHED} from 'scripts/actions/list.js';
+    BOOKMARK_FOLDERS_REQUEST_FINISHED,
+    BOOKMARK_FOLDERS_IDS_SELECTED,
+    BOOKMARK_FOLDERS_IDS_DESELECTED} from 'scripts/actions/list.js';
 
 function rootBookmark(state = null, action) {
     switch (action.type) {
@@ -15,8 +17,22 @@ function rootBookmark(state = null, action) {
     }
 }
 
-function selectedIds(state = [], action) {
+function selectedIds(state = new Set([]), action) {
     switch (action.type) {
+    case BOOKMARK_FOLDERS_REQUEST_STARTED:
+        return new Set([]);
+    case BOOKMARK_FOLDERS_IDS_SELECTED: {
+        const newSelectedIds = new Set([...state]);
+        action.ids.forEach(id => newSelectedIds.add(id));
+
+        return newSelectedIds;
+    }
+    case BOOKMARK_FOLDERS_IDS_DESELECTED: {
+        const newSelectedIds = new Set([...state]);
+        action.ids.forEach(id => newSelectedIds.delete(id));
+
+        return newSelectedIds;
+    }
     default:
         return state;
     }

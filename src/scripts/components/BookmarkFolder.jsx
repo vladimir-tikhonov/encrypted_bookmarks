@@ -13,24 +13,44 @@ class BookmarkFolder extends React.PureComponent {
     }
 
     renderChildren() {
-        const {bookmarkFolder} = this.props;
+        const {bookmarkFolder, onToggle, selectedIds} = this.props;
 
         return bookmarkFolder.children.map(child => {
             return (
-                <BookmarkFolder key={child.id} bookmarkFolder={child} />
+                <BookmarkFolder
+                    key={child.id}
+                    bookmarkFolder={child}
+                    onToggle={onToggle}
+                    selectedIds={selectedIds}
+                />
             );
         });
     }
 
+    renderLabel() {
+        const {bookmarkFolder, onToggle, selectedIds} = this.props;
+        const checked = selectedIds.has(bookmarkFolder.id);
+
+        return (
+            <div>
+                <span className="node">{bookmarkFolder.name}</span>
+                <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={() => onToggle(bookmarkFolder, !checked)}
+                />
+            </div>
+        );
+    }
+
     render() {
         const {bookmarkFolder} = this.props;
-        const label = <span className="node">{bookmarkFolder.name}</span>;
 
         return (
             <div>
                 <TreeView
                     key={bookmarkFolder.id}
-                    nodeLabel={label}
+                    nodeLabel={this.renderLabel()}
                     collapsed={this.state.collapsed}
                     onArrowClick={() => this.toggleCollapsed()}
                 >
@@ -43,6 +63,8 @@ class BookmarkFolder extends React.PureComponent {
 
 BookmarkFolder.propTypes = {
     bookmarkFolder: PropTypes.object.isRequired,
+    selectedIds: PropTypes.object.isRequired,
+    onToggle: PropTypes.func.isRequired,
 };
 
 export default BookmarkFolder;
