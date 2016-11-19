@@ -13,10 +13,6 @@ import storage from 'scripts/services/Storage.js';
 import bookmarkFolderHelper from 'scripts/helpers/bookmark_folder.js';
 
 class BookmarkFolderTree extends React.PureComponent {
-    componentDidMount() {
-        this.props.loadBookmarkFolders();
-    }
-
     onBookmarkFolderToggle(bookmarkFolder, isChecked) {
         if (isChecked) {
             this.onFolderChecked(bookmarkFolder);
@@ -49,11 +45,12 @@ class BookmarkFolderTree extends React.PureComponent {
         });
     }
 
+    onUpdateButtomClicked() {
+        this.props.loadBookmarkFolders();
+    }
+
     render() {
         const {rootBookmark} = this.props;
-        if (!rootBookmark) {
-            return null;
-        }
 
         return (
             <div>
@@ -65,6 +62,7 @@ class BookmarkFolderTree extends React.PureComponent {
                 <div>
                     <button onClick={() => this.onSaveButtonClicked()}>Save</button>
                     <button onClick={() => this.onResetButtonClicked()}>Reset</button>
+                    <button onClick={() => this.onUpdateButtomClicked()}>Reload</button>
                 </div>
             </div>
         );

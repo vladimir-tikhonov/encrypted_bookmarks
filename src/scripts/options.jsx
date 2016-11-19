@@ -6,14 +6,19 @@ import thunk from 'redux-thunk';
 
 import reducer from 'scripts/reducers/index.js';
 import storage from 'scripts/services/Storage.js';
+import bookmarksService from 'scripts/services/BookmarksService.js';
 import BookmarkFolderTree from 'scripts/components/BookmarkFolderTree.jsx';
 
 import 'styles/options.css';
 
-storage.getHiddenBookmarkFolderIds().then(ids => {
+Promise.all([
+    storage.getHiddenBookmarkFolderIds(),
+    bookmarksService.fetchBookmarkTree(),
+]).then(([ids, bookmarks]) => {
     const initialState = {
         bookmarkFolders: {
             selectedIds: ids,
+            rootBookmark: bookmarks[0],
         },
     };
 
