@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 
-const {SOURCE_PATH, BUILD_PATH} = require('./common.js');
+const { SOURCE_PATH, BUILD_PATH } = require('./common.js');
 
 module.exports = {
     entry: {

@@ -1,3 +1,3 @@
-let sharedCondig = require('./webpack.dll.shared.config.js');
+const sharedCondig = require('./webpack.dll.shared.config.js');
 
 module.exports = sharedCondig;

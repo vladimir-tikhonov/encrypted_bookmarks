@@ -5,7 +5,7 @@ export default {
         const idsToSelect = bookmarkFolder.deepGetChildrenIds();
         const allSelectedIds = [bookmarkFolder.id, ...idsToSelect, ...selectedIds];
 
-        bookmarkFolder.deepGetParents().forEach(parent => {
+        bookmarkFolder.deepGetParents().forEach((parent) => {
             const childrenIds = parent.deepGetChildrenIds();
             const allChildAreChecked = _difference(childrenIds, allSelectedIds).length === 0;
 
