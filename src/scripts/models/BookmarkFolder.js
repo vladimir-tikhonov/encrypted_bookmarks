@@ -44,6 +44,10 @@ export default class BookmarkFolder {
         return ids;
     }
 
+    isRoot() {
+        return this.parent === null;
+    }
+
     deepGetParents() {
         if (!this.parent) {
             return [];

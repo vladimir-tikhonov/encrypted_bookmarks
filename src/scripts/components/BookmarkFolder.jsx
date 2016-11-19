@@ -30,10 +30,11 @@ class BookmarkFolder extends React.PureComponent {
     renderLabel() {
         const {bookmarkFolder, onToggle, selectedIds} = this.props;
         const checked = selectedIds.has(bookmarkFolder.id);
+        const name = bookmarkFolder.isRoot() ? '<Root>' : bookmarkFolder.name;
 
         return (
-            <div>
-                <span className="node">{bookmarkFolder.name}</span>
+            <div className="label-wrapper">
+                <span className="node">{name}</span>
                 <input
                     type="checkbox"
                     checked={checked}
