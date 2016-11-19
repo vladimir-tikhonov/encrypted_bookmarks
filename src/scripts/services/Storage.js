@@ -1,5 +1,5 @@
 const NATIVE_STORAGE = chrome.storage.sync;
-const HIDDEN_BOOKMARK_FOLDER_IDS_KEY = 'HIDDEN_BOOKMARK_FOLDER_IDS_KEY';
+const ENCRYPTED_BOOKMARK_FOLDER_IDS_KEY = 'ENCRYPTED_BOOKMARK_FOLDER_IDS_KEY';
 
 function get(locator) {
     return new Promise((resolve) => {
@@ -14,12 +14,12 @@ function set(data) {
 }
 
 export default {
-    getHiddenBookmarkFolderIds() {
-        return get({ [HIDDEN_BOOKMARK_FOLDER_IDS_KEY]: [] })
-            .then(data => data[HIDDEN_BOOKMARK_FOLDER_IDS_KEY]);
+    getEncryptedBookmarkFolderIds() {
+        return get({ [ENCRYPTED_BOOKMARK_FOLDER_IDS_KEY]: [] })
+            .then(data => data[ENCRYPTED_BOOKMARK_FOLDER_IDS_KEY]);
     },
 
-    setHiddenBookmarkFolderIds(ids) {
-        return set({ [HIDDEN_BOOKMARK_FOLDER_IDS_KEY]: ids });
+    setEncryptedBookmarkFolderIds(ids) {
+        return set({ [ENCRYPTED_BOOKMARK_FOLDER_IDS_KEY]: ids });
     },
 };

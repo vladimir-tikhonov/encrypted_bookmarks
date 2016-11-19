@@ -1,12 +1,12 @@
 {
-  "name": "hidden_bookmarks",
+  "name": "encrypted_bookmarks",
   "version": "0.1.0",
   "description": "Hide and add password protection to your bookmarks",
   "author": "Vladimir Tikhonov",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vladimir-tikhonov/hidden_bookmarks.git"
+    "url": "git+https://github.com/vladimir-tikhonov/encrypted_bookmarks.git"
   },
   "scripts": {
     "start-webpack": "webpack --config configs/webpack.dev.config.js --watch",
