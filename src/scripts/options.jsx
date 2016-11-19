@@ -1,13 +1,13 @@
 import React from 'react';
-import {render} from 'react-dom';
-import {createStore, applyMiddleware} from 'redux';
-import {Provider} from 'react-redux';
+import { render } from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 import reducer from 'scripts/reducers/index.js';
 import storage from 'scripts/services/Storage.js';
 import bookmarksService from 'scripts/services/BookmarksService.js';
-import BookmarkFolderTree from 'scripts/components/BookmarkFolderTree.jsx';
+import OptionsPage from 'scripts/pages/OptionsPage.jsx';
 
 import 'styles/options.css';
 
@@ -24,13 +24,11 @@ Promise.all([
 
     const store = createStore(reducer, initialState, applyMiddleware(thunk));
 
-    const OptionsPage = () => {
-        return (
-            <Provider store={store}>
-                <BookmarkFolderTree />
-            </Provider>
-        ) ;
-    };
+    const Root = () => (
+        <Provider store={store}>
+            <OptionsPage />
+        </Provider>
+    );
 
-    render(<OptionsPage />, document.getElementById('app-container'));
+    render(<Root />, document.getElementById('app-container'));
 });

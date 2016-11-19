@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const {SOURCE_PATH, BUILD_PATH} = require('./common.js');
+const { SOURCE_PATH, BUILD_PATH } = require('./common.js');
 
 module.exports = {
     entry: [

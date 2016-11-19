@@ -1,14 +1,5 @@
 module.exports = {
-    'parser': 'babel-eslint',
-    'ecmaVersion': 6,
-    'ecmaFeatures': {
-        'jsx': true,
-        'experimentalObjectRestSpread': true,
-    },
-    'extends': ['eslint:recommended', 'plugin:react/recommended'],
-    'plugins': [
-        'react',
-    ],
+    'extends': ['airbnb'],
     'env': {
         'browser': true,
         'node': true,
@@ -18,27 +9,17 @@ module.exports = {
         'chrome': false,
     },
     'rules': {
-        'no-global-assign': 'error',
-        'no-invalid-this': 'error',
-        'no-self-compare': 'error',
-        'no-unused-expressions': 'error',
-        'no-useless-call': 'error',
-        'no-use-before-define': 'error',
-        'jsx-quotes': ['error', 'prefer-double'],
-
-        'brace-style': 'error',
-        'comma-dangle': ['error', 'always-multiline'],
-        'camelcase': 'error',
         'indent': ['error', 4],
-        'eol-last': ['error', 'always'],
-        'quotes': ['error', 'single'],
-        'semi': ['error', 'always'],
-        'object-curly-spacing': ['error', 'never'],
-        'one-var': ['error', 'never'],
-        'no-multiple-empty-lines': ['error'],
+        'react/jsx-indent': ['error', 4],
+        'react/jsx-indent-props': ['error', 4],
+        'react/prop-types': ['error', {ignore: ['children']}],
+        'comma-dangle': ['error', 'always-multiline'],
 
-        'react/jsx-boolean-value': 'error',
-        'react/jsx-no-duplicate-props': 'error',
-        'react/prop-types': ['error', {ignore: ['children']}]
+        'no-underscore-dangle': 'off',
+        'no-prototype-builtins': 'off',
+        'react/forbid-prop-types': 'off',
+        'import/no-extraneous-dependencies': 'off',
+        'import/no-unresolved': 'off',
+        'import/extensions': 'off',
     },
 };

@@ -1,34 +1,32 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 
 import TreeView from 'scripts/components/TreeView.jsx';
 
 class BookmarkFolder extends React.PureComponent {
     constructor() {
         super();
-        this.state = {collapsed: false};
+        this.state = { collapsed: false };
     }
 
     toggleCollapsed() {
-        this.setState({collapsed: !this.state.collapsed});
+        this.setState({ collapsed: !this.state.collapsed });
     }
 
     renderChildren() {
-        const {bookmarkFolder, onToggle, selectedIds} = this.props;
+        const { bookmarkFolder, onToggle, selectedIds } = this.props;
 
-        return bookmarkFolder.children.map(child => {
-            return (
-                <BookmarkFolder
-                    key={child.id}
-                    bookmarkFolder={child}
-                    onToggle={onToggle}
-                    selectedIds={selectedIds}
-                />
-            );
-        });
+        return bookmarkFolder.children.map(child => (
+            <BookmarkFolder
+                key={child.id}
+                bookmarkFolder={child}
+                onToggle={onToggle}
+                selectedIds={selectedIds}
+            />
+        ));
     }
 
     renderLabel() {
-        const {bookmarkFolder, onToggle, selectedIds} = this.props;
+        const { bookmarkFolder, onToggle, selectedIds } = this.props;
         const checked = selectedIds.includes(bookmarkFolder.id);
         const name = bookmarkFolder.isRoot() ? '<Root>' : bookmarkFolder.name;
 
@@ -45,7 +43,7 @@ class BookmarkFolder extends React.PureComponent {
     }
 
     render() {
-        const {bookmarkFolder} = this.props;
+        const { bookmarkFolder } = this.props;
 
         return (
             <div>

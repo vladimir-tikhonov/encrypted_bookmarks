@@ -1,7 +1,7 @@
 import BookmarkFolder from 'scripts/models/BookmarkFolder.js';
 
 function transformNativeBookmarkTree(nativeBookmarkTree, parent) {
-    return nativeBookmarkTree.map(bookmarkTreeNode => {
+    return nativeBookmarkTree.map((bookmarkTreeNode) => {
         const isFolder = !bookmarkTreeNode.hasOwnProperty('url');
         if (!isFolder) {
             return null;
@@ -10,11 +10,14 @@ function transformNativeBookmarkTree(nativeBookmarkTree, parent) {
         const bookmarkFolder = new BookmarkFolder({
             id: bookmarkTreeNode.id,
             name: bookmarkTreeNode.title,
-            parent: parent,
+            parent,
             children: [],
         });
 
-        var children = transformNativeBookmarkTree(bookmarkTreeNode.children || [], bookmarkFolder);
+        const children = transformNativeBookmarkTree(
+            bookmarkTreeNode.children || [],
+            bookmarkFolder
+        );
         bookmarkFolder.children = children;
 
         return bookmarkFolder;

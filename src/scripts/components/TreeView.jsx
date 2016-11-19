@@ -1,9 +1,9 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
 class TreeView extends React.PureComponent {
     renderArrow() {
-        const {collapsed, onArrowClick, children} = this.props;
+        const { collapsed, onArrowClick, children } = this.props;
         if (children.length === 0) {
             return null;
         }
@@ -13,7 +13,7 @@ class TreeView extends React.PureComponent {
         });
 
         return (
-            <div
+            <button
                 className={classes}
                 onClick={onArrowClick}
             />
@@ -48,8 +48,6 @@ class TreeView extends React.PureComponent {
 TreeView.propTypes = {
     collapsed: PropTypes.bool.isRequired,
     nodeLabel: PropTypes.node.isRequired,
-    className: PropTypes.string,
-    itemClassName: PropTypes.string,
     onArrowClick: PropTypes.func.isRequired,
 };
 

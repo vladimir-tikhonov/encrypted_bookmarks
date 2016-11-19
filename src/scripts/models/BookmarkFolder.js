@@ -1,5 +1,5 @@
 export default class BookmarkFolder {
-    constructor({id, name, parent, children}) {
+    constructor({ id, name, parent, children }) {
         this._id = id;
         this._name = name;
         this._parent = parent;
@@ -36,7 +36,7 @@ export default class BookmarkFolder {
         }
 
         let ids = [];
-        this.children.map(child => {
+        this.children.forEach((child) => {
             ids.push(child.id);
             ids = ids.concat(child.deepGetChildrenIds());
         });

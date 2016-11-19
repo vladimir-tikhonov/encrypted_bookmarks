@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import _union from 'lodash/union';
 import _difference from 'lodash/difference';
 
@@ -7,7 +7,7 @@ import {
     BOOKMARK_FOLDERS_REQUEST_FINISHED,
     BOOKMARK_FOLDERS_IDS_SELECTED,
     BOOKMARK_FOLDERS_IDS_DESELECTED,
-    BOOKMARK_FOLDERS_IDS_RESTORED} from 'scripts/actions/list.js';
+    BOOKMARK_FOLDERS_IDS_RESTORED } from 'scripts/actions/list.js';
 
 function rootBookmark(state = null, action) {
     switch (action.type) {
@@ -38,5 +38,5 @@ export default combineReducers({
     selectedIds,
 });
 
-export const getRootBookmark = (state) => state.rootBookmark;
-export const getSelectedIds = (state) => state.selectedIds;
+export const getRootBookmark = state => state.rootBookmark;
+export const getSelectedIds = state => state.selectedIds;
