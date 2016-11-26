@@ -18,7 +18,7 @@ const bookmarkFoldersRequestFinished = rootBookmark => ({
 export const loadBookmarkFolders = () => (dispatch) => {
     dispatch(bookmarkFoldersRequestStarted());
 
-    return bookmarksService.fetchBookmarkTree().then((bookmarks) => {
+    return bookmarksService.fetchBookmarkFoldersTree().then((bookmarks) => {
         dispatch(bookmarkFoldersRequestFinished(bookmarks[0]));
     });
 };

@@ -13,7 +13,7 @@ import 'styles/options.scss';
 
 Promise.all([
     storage.getEncryptedBookmarkFolderIds(),
-    bookmarksService.fetchBookmarkTree(),
+    bookmarksService.fetchBookmarkFoldersTree(),
 ]).then(([ids, bookmarks]) => {
     const initialState = {
         bookmarkFolders: {

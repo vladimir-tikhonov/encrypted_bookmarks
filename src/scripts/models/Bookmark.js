@@ -1,7 +1,8 @@
-export default class BookmarkFolder {
-    constructor({ id, name, parent, children }) {
+export default class Bookmark {
+    constructor({ id, title, url, parent, children }) {
         this._id = id;
-        this._name = name;
+        this._title = title;
+        this._url = url;
         this._parent = parent;
         this._children = children;
     }
@@ -10,8 +11,16 @@ export default class BookmarkFolder {
         return this._id;
     }
 
-    get name() {
-        return this._name;
+    get title() {
+        return this._title;
+    }
+
+    get url() {
+        return this._url;
+    }
+
+    set url(value) {
+        this._url = value;
     }
 
     get parent() {
@@ -24,6 +33,10 @@ export default class BookmarkFolder {
 
     set children(value) {
         this._children = value;
+    }
+
+    isFolder() {
+        return !this.url;
     }
 
     hasChildren() {

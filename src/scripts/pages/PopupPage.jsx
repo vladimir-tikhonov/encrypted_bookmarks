@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import storage from 'scripts/services/Storage.js';
+import cryptographyService from 'scripts/services/CryptographyService.js';
 
 export default class PopupPage extends React.PureComponent {
     constructor() {
@@ -10,7 +10,12 @@ export default class PopupPage extends React.PureComponent {
 
     onEncryptonToggleButtonClick() {
         const { isEncryptionActive } = this.props;
-        storage.setIsEncryptionActive(!isEncryptionActive);
+
+        if (isEncryptionActive) {
+            cryptographyService.performDecryption();
+        } else {
+            cryptographyService.performEncryption();
+        }
     }
 
     render() {
@@ -18,7 +23,7 @@ export default class PopupPage extends React.PureComponent {
         return (
             <div className="popup-page">
                 <button onClick={this.onEncryptonToggleButtonClick}>
-                    {isEncryptionActive ? 'Encrypt bookmarks' : 'Decrypt bookmarks'}
+                    {isEncryptionActive ? 'Decrypt bookmarks' : 'Encrypt bookmarks'}
                 </button>
             </div>
         );
