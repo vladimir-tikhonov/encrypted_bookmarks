@@ -28,7 +28,7 @@ class BookmarkFolder extends React.PureComponent {
     renderLabel() {
         const { bookmarkFolder, onToggle, selectedIds } = this.props;
         const checked = selectedIds.includes(bookmarkFolder.id);
-        const name = bookmarkFolder.isRoot() ? '<Root>' : bookmarkFolder.name;
+        const name = bookmarkFolder.isRoot() ? '<Root>' : bookmarkFolder.title;
 
         return (
             <div className="label-wrapper">

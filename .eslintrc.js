@@ -15,6 +15,7 @@ module.exports = {
         'react/prop-types': ['error', {ignore: ['children']}],
         'comma-dangle': ['error', 'always-multiline'],
 
+        'no-else-return': 'off',
         'no-underscore-dangle': 'off',
         'no-prototype-builtins': 'off',
         'react/forbid-prop-types': 'off',
