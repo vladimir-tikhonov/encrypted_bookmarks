@@ -28,10 +28,10 @@ module.exports = {
                 },
             },
             {
-                test: /\.css$/,
+                test: /\.scss$/,
                 loaders: ExtractTextPlugin.extract({
                     fallbackLoader: 'style-loader',
-                    loader: ['css-loader'],
+                    loader: ['css-loader', 'sass-loader'],
                 }),
             },
         ],
@@ -42,12 +42,11 @@ module.exports = {
             scripts: path.resolve(SOURCE_PATH, 'scripts'),
             styles: path.resolve(SOURCE_PATH, 'styles'),
         },
-        extensions: ['.js', '.jsx', '.css'],
     },
 
     plugins: [
         new webpack.DllReferencePlugin({
-            manifest: path.join(BUILD_PATH, 'dll', 'manifest.json'),
+            manifest: path.join(BUILD_PATH, 'vendors-manifest.json'),
         }),
         new ExtractTextPlugin('[name].css'),
     ],

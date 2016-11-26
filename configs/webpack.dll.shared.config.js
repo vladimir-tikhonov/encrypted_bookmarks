@@ -9,15 +9,15 @@ module.exports = {
     ],
 
     output: {
-        path: path.join(BUILD_PATH, 'dll'),
-        filename: 'dll.js',
-        library: 'dll',
+        path: BUILD_PATH,
+        filename: 'vendors.js',
+        library: 'vendors',
     },
 
     plugins: [
         new webpack.DllPlugin({
-            path: path.join(BUILD_PATH, 'dll', 'manifest.json'),
-            name: 'dll',
+            path: path.join(BUILD_PATH, 'vendors-manifest.json'),
+            name: 'vendors',
         }),
     ],
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import 'styles/popup.css';
+import 'styles/popup.scss';
 
 const PopupPage = () => <h2>Popup page</h2>;
 

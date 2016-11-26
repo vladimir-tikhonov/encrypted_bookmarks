@@ -8,8 +8,8 @@ class TreeView extends React.PureComponent {
             return null;
         }
 
-        const classes = classnames('tree-view_arrow', {
-            'tree-view_arrow-collapsed': collapsed,
+        const classes = classnames('arrow', {
+            collapsed,
         });
 
         return (
@@ -27,13 +27,13 @@ class TreeView extends React.PureComponent {
             children,
         } = this.props;
 
-        const containerClasses = classnames('tree-view_children', {
-            'tree-view_children-collapsed': collapsed,
+        const containerClasses = classnames('children', {
+            collapsed,
         });
 
         return (
             <div className="tree-view">
-                <div className={'tree-view_item'}>
+                <div className={'item'}>
                     {this.renderArrow()}
                     {nodeLabel}
                 </div>
