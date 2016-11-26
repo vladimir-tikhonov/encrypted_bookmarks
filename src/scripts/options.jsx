@@ -9,7 +9,7 @@ import storage from 'scripts/services/Storage.js';
 import bookmarksService from 'scripts/services/BookmarksService.js';
 import OptionsPage from 'scripts/pages/OptionsPage.jsx';
 
-import 'styles/options.css';
+import 'styles/options.scss';
 
 Promise.all([
     storage.getEncryptedBookmarkFolderIds(),

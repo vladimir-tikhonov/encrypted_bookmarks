@@ -1,0 +1,30 @@
+.tree-view {
+    overflow-y: hidden;
+
+    .children {
+        margin-left: 16px;
+
+        &.collapsed {
+            height: 0;
+        }
+    }
+
+    .arrow {
+        cursor: pointer;
+        margin-right: 6px;
+        display: inline-block;
+        user-select: none;
+
+        &::after {
+            content: '▾';
+        }
+
+        &.collapsed {
+            transform: rotate(-90deg);
+        }
+    }
+
+    .label-wrapper {
+        display: inline-block;
+    }
+}

@@ -63,6 +63,9 @@ class OptionsPage extends React.PureComponent {
 
     render() {
         const { rootBookmark } = this.props;
+        if (!rootBookmark) {
+            return null;
+        }
 
         return (
             <div>

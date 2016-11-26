@@ -12,7 +12,7 @@ build-prod:
 	$(MAKE) clean-build
 	$(MAKE) setup-prod-build
 	npm run build-prod
-	rm -f build/dll/manifest.json build/.DS_Store
+	rm -f build/vendors-manifest.json build/.DS_Store
 	cd build; zip -r -T release.zip ./*; cd ..
 
 clean-build:
@@ -38,5 +38,6 @@ setup:
 
 build-ci:
 	npm run eslint
+	npm run sass-lint
 	$(MAKE) build-dev
 	$(MAKE) build-prod
