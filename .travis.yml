@@ -8,3 +8,7 @@ before_install:
 
 script:
   - make build-ci
+
+cache:
+  directories:
+    - node_modules
