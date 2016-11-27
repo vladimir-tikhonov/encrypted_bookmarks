@@ -10,18 +10,26 @@ export default class PopupPage extends React.PureComponent {
 
     onEncryptonToggleButtonClick() {
         const { isEncryptionActive } = this.props;
+        const password = this.passwordInput.value;
 
         if (isEncryptionActive) {
-            cryptographyService.performDecryption();
+            cryptographyService.performDecryption(password);
         } else {
-            cryptographyService.performEncryption();
+            cryptographyService.performEncryption(password);
         }
+
+        this.passwordInput.value = '';
     }
 
     render() {
         const { isEncryptionActive } = this.props;
         return (
             <div className="popup-page">
+                <input
+                    type="password"
+                    placeholder="Enter password"
+                    ref={(input) => { this.passwordInput = input; }}
+                />
                 <button onClick={this.onEncryptonToggleButtonClick}>
                     {isEncryptionActive ? 'Decrypt bookmarks' : 'Encrypt bookmarks'}
                 </button>
