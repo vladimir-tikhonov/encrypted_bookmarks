@@ -6,54 +6,57 @@ const SEPARATOR = '___';
 
 const isEncrypted = bookmark => bookmark.title.startsWith(ENCRYPTED_PREFIX);
 
-function encryptString(value) {
-    return btoa(encodeURIComponent(value));
+function encryptString(value, password) {
+    return btoa(encodeURIComponent(JSON.stringify(sjcl.encrypt(password, value))));
 }
 
-function getEncryptedTitle(bookmark) {
-    return ENCRYPTED_PREFIX + encryptString(bookmark.title) +
-        SEPARATOR + encryptString(bookmark.url);
+function getEncryptedTitle(bookmark, password) {
+    return ENCRYPTED_PREFIX + encryptString(bookmark.title, password) +
+        SEPARATOR + encryptString(bookmark.url, password);
 }
 
-function encryptBookmark(bookmark) {
+function encryptBookmark(bookmark, password) {
     if (bookmark.isFolder()) {
-        return Promise.all(bookmark.children.map(encryptBookmark));
+        return Promise.all(bookmark.children.map(child => encryptBookmark(child, password)));
     }
 
     if (isEncrypted(bookmark)) {
         return Promise.resolve(bookmark);
     } else {
         return bookmarksService.update(bookmark, {
-            title: getEncryptedTitle(bookmark),
+            title: getEncryptedTitle(bookmark, password),
             url: 'https://example.org',
         });
     }
 }
 
-function decryptString(encryptedValue) {
-    try {
-        return decodeURIComponent(atob(encryptedValue));
-    } catch (e) {
-        console.debug(e); // eslint-disable-line no-console
-        return encryptedValue;
-    }
+function encryptTree(rootNodeId, password) {
+    return bookmarksService.fetchBookmarkSubTree(rootNodeId)
+        .then(bookmarks => (
+            Promise.all(bookmarks.map(bookmark => encryptBookmark(bookmark, password)))
+        )
+    );
 }
 
-function decryptTitle(encryptedTitle) {
+function decryptString(encryptedValue, password) {
+    return sjcl.decrypt(password, JSON.parse(decodeURIComponent(atob(encryptedValue))));
+}
+
+function decryptTitle(encryptedTitle, password) {
     const [title, url] = encryptedTitle.replace(ENCRYPTED_PREFIX, '')
-        .split(SEPARATOR).map(decryptString);
+        .split(SEPARATOR).map(value => decryptString(value, password));
     return { title, url };
 }
 
-function decryptBookmark(bookmark) {
+function decryptBookmark(bookmark, password) {
     if (bookmark.isFolder()) {
-        return Promise.all(bookmark.children.map(decryptBookmark));
+        return Promise.all(bookmark.children.map(child => decryptBookmark(child, password)));
     }
 
     if (!isEncrypted(bookmark)) {
         return Promise.resolve(bookmark);
     } else {
-        const bookmarkData = decryptTitle(bookmark.title);
+        const bookmarkData = decryptTitle(bookmark.title, password);
         return bookmarksService.update(bookmark, {
             title: bookmarkData.title,
             url: bookmarkData.url,
@@ -61,23 +64,20 @@ function decryptBookmark(bookmark) {
     }
 }
 
-function encryptTree(rootNodeId) {
-    return bookmarksService.fetchBookmarkSubTree(rootNodeId)
-        .then(bookmarks => (
-            Promise.all(bookmarks.map(encryptBookmark))
-        ));
-}
-
 export default {
-    performEncryption() {
+    performEncryption(password) {
         return storage.getEncryptedBookmarkFolderIds()
-            .then(ids => Promise.all(ids.map(encryptTree)))
+            .then(ids => (
+                Promise.all(ids.map(id => encryptTree(id, password)))
+            ))
             .then(() => storage.setIsEncryptionActive(true));
     },
 
-    performDecryption() {
+    performDecryption(password) {
         return bookmarksService.fetchBookmarkTree()
-            .then(bookmarks => Promise.all(bookmarks.map(decryptBookmark)))
+            .then(bookmarks => (
+                Promise.all(bookmarks.map(bookmark => decryptBookmark(bookmark, password)))
+            ))
             .then(() => storage.setIsEncryptionActive(false));
     },
 };

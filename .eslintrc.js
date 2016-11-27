@@ -7,6 +7,7 @@ module.exports = {
     },
     'globals': {
         'chrome': false,
+        'sjcl': false
     },
     'rules': {
         'indent': ['error', 4],
