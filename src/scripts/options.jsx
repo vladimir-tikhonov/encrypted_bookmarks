@@ -24,7 +24,7 @@ Promise.all([
 
     const store = createStore(reducer, initialState, applyMiddleware(thunk));
 
-    const Root = () => (
+    const Root = (
         <Provider store={store}>
             <OptionsPage />
         </Provider>
